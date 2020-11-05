@@ -3,7 +3,7 @@
 # Rules similar to original tic tac toe
 # Made by: Armaan Barak
 
-# Module Imports
+# Importing necessary functions
 from os import name, system
 from random import randint
 
