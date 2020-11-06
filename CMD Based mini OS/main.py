@@ -1,8 +1,9 @@
+# imports
 from getpass import getpass
-import user
 import commands
 import homepage
 import dashboard
+import main_functions
 
 
 # Welcome message 2
@@ -55,33 +56,42 @@ input('Press any key to continue: ')
 user.initialize_accounts_file()
 
 page = 'Homepage'
-userid = None
-pwd = None
 
 # Running OS
 while True:
 
-    # printing home page text
-    homepage.homepage_text()
+    # if page is homepage
+    if page == 'Homepage':
+        # printing home page text
+        homepage.homepage_text()
 
-    # processing homepage input
-    while True:
+        # processing homepage input
+        while True:
 
-        try:
-            res = int(input('$ '))
-        except:
-            print('You raised an error! I couldn\'t process that input. Try Again\n')
-            continue
-        else:
+            # storing returned values
+            break_continue, page, logged_in = main_functions.try_except_execute(homepage.homepage_conditional, [0, 1, 2, 3, 4, 5, 6], page)
 
-            if res in [0, 1, 2, 3, 4, 5]:  # Valid Input passed
-
-                # control flow for homepage text
-                page, userid, pwd = homepage.homepage_conditional(res, page)
-                break
-            
-            else:
-                print('Your number didn\'t match with valid inputs. Try Again\n')
+            # processing program based on returned values
+            if break_continue == 'continue':
                 continue
-
+            break
     
+    # if page is dashboard and user is logged in
+    if logged_in:
+        
+        # displaying dashboard text
+        dashboard.dashboard_text()
+
+        # processing homepage input
+        while True:
+
+            # storing returned values
+            break_continue, page, logged_in = main_functions.try_except_execute(dashboard.dashboard_conditional, [0, 1, 2, 3, 4, 5], page)
+
+            # processing program based on returned values
+            if break_continue == 'continue':
+                continue
+            break
+    
+    # continuing loop if the OS is not turned off!
+    continue
