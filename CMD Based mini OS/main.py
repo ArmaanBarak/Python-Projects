@@ -1,5 +1,6 @@
 # imports
 from getpass import getpass
+import user
 import commands
 import homepage
 import dashboard
