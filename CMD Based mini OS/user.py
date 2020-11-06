@@ -10,7 +10,7 @@ import json
 # initializing file
 def initialize_accounts_file():
 
-    fields = {'Usernames': [], 'Passwords': []}
+    fields = {'Usernames': ['admin'], 'Passwords': ['admin']}
 
     with open('accounts.json', 'w') as accounts:
 
