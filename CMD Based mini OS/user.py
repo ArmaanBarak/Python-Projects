@@ -16,6 +16,30 @@ def initialize_accounts_file():
 
         json.dump(fields, accounts)
 
+
+# log in function
+def login(user, pwd):
+
+    with open('accounts.json') as accounts:
+        
+        accounts_dict = json.load(accounts)
+
+        # if username exist in file
+        if user in accounts_dict['Usernames']:
+
+            user_idx = accounts_dict['Usernames'].index(user)
+
+            # if password matches with actual password
+            if pwd == accounts_dict['Passwords'][user_idx]:
+                print('Login Successful!\nAccess Granted!\n\n')
+                return True
+        
+        # if password or username failed to match
+        else:
+            print('Username or Password didn\'t match!\n\n')
+            return False
+        
+
 # create account function
 def create_account():
 
@@ -25,19 +49,19 @@ def create_account():
 
     print("Fill in the credentials below: \n")
 
-    print('Extra spaces infront and at end of username and password will be automatically remove off!\n')
+    print('Extra spaces infront and at end of username and password will be automatically remove off!\nBe careful for lower and uppercases!\n')
 
     # Looping to get correct input from user
     while True:
 
         # user input
-        user = input('Username: \n> ').strip()
+        user = input('Username: \n$ ').strip()
 
         # confirming passwords
         while True:
 
-            pwd = getpass('Password: \n> ')
-            confirm = getpass('Confirm Password: \n> ')
+            pwd = getpass('Password: \n$ ')
+            confirm = getpass('Confirm Password: \n$ ')
 
             # is passwords do not match
             if confirm != pwd:
@@ -81,7 +105,7 @@ def delete_account():
 
     while True:
 
-        user = input('Username: \n> ').strip()
+        user = input('Username: \n$ ').strip()
 
         # opening accounts file
         with open('accounts.json') as file:
@@ -104,7 +128,7 @@ def delete_account():
         while True:
 
             # getting pass from user
-            pwd = getpass('Password: \n> ')
+            pwd = getpass('Password: \n$ ')
 
             # passwords don't match
             if pwd != account_pwd:
@@ -118,7 +142,7 @@ def delete_account():
             while True:
                 
                 # confirming to delete account
-                res = input('Are you sure you want to delete the account? Enter (Y or N)\n(Your data would be permanently deleted)\n> ')
+                res = input('Are you sure you want to delete the account? Enter (Y or N)\n(Your data would be permanently deleted)\n$ ')
 
                 # If not a valid input
                 if res.lower()[0] not in ['y', 'n']:
