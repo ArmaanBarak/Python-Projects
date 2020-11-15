@@ -58,7 +58,7 @@ for i in range(num_of_enemies):
     enemy_img.append(random.choice([alien_img, alien_img2]))
     enemy_x.append(random.randint(0, 735))
     enemy_y.append(random.randint(50, 200))
-    enemy_x_change.append(1)
+    enemy_x_change.append(0.5)
     enemy_y_change.append(30)
 
 # Score variables
@@ -146,6 +146,8 @@ game_over_screen = False
 
 while running:
 
+    mouse = pygame.mouse.get_pos()
+
     # To loop through events untill event is QUIT
     for event in pygame.event.get():
 
@@ -225,10 +227,10 @@ while running:
         if event.type == pygame.KEYDOWN:
 
             if event.key == pygame.K_LEFT:
-                player_x_change = -1
+                player_x_change = -.8
 
             if event.key == pygame.K_RIGHT:
-                player_x_change = 1
+                player_x_change = .8
             
             if event.key == pygame.K_SPACE:
                 if bullet_state == 'ready':
@@ -427,10 +429,10 @@ while running:
             enemy_x[i] += enemy_x_change[i]
 
             if enemy_x[i] <= 0:
-                enemy_x_change[i] = 1
+                enemy_x_change[i] = .5
                 enemy_y[i] += enemy_y_change[i]
             elif enemy_x[i] >= 736:
-                enemy_x_change[i] = -1
+                enemy_x_change[i] = -.5
                 enemy_y[i] += enemy_y_change[i]
 
             # Collision control
