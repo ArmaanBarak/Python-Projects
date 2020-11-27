@@ -271,8 +271,8 @@ if __name__ == "__main__":
         # If player is not busted and choose to stand
         if player_hand.value <= 21:
             
-            # while dealer's cards value are less than 17 (17 choosen to be lowest value, can be changed, game works fine still)
-            while dealer_hand.value < 17:
+            # while dealer's cards value are less than 18 (18 choosen to be lowest value, can be changed, game works fine still)
+            while dealer_hand.value < 18:
                 
                 # hitting dealer's deck
                 game_functions.hit(deck_of_cards, dealer_hand)
